@@ -1,12 +1,10 @@
 [package]
-name = "messages-common"
+name = "nats-common"
 version = "0.1.0"
-edition = "2021"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+edition = "2024"
 
 [dependencies]
-anyhow = "1.0.97"
+anyhow = "1.0.97" # TODO: switch to thiserror
 async-nats = "0.38.0"
 bytes = "1.10.1"
 futures-util = "0.3.31"
