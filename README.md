@@ -1,4 +1,4 @@
-# Messages Common
+# NATS Common
 
-Library for commonly used logic regarding messages by many components written in Rust.
-For internal use of the Sunangel Project.
+Library for commonly used messaging logic.
+Designed to work with the [async-nats](https://github.com/nats-io/nats.rs?tab=readme-ov-file#async-nats) crate.
