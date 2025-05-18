@@ -1,6 +1,6 @@
 use std::{env, error::Error, pin::Pin};
 
-use async_nats::jetstream::{self, consumer::pull::MessagesError, kv::Store, Context};
+use async_nats::{jetstream::{self, consumer::pull::MessagesError, kv::Store, Context}, ConnectOptions};
 use futures_util::Stream;
 use log::debug;
 
@@ -8,7 +8,12 @@ pub async fn connect_nats() -> async_nats::Client {
     let host = env::var("NATS_HOST").unwrap_or("localhost".to_string());
     let port = env::var("NATS_PORT").unwrap_or("4222".to_string());
 
-    async_nats::connect(format!("{}:{}", host, port))
+    let mut options = ConnectOptions::new();
+    if let Ok(password) = env::var("NATS_PASSWORD") {
+        options = options.token(password);
+    }
+
+    options.connect(format!("{}:{}", host, port))
         .await
         .expect("Could not connect to NATS")
 }
