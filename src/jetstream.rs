@@ -6,7 +6,9 @@ use log::debug;
 
 pub async fn connect_nats() -> async_nats::Client {
     let host = env::var("NATS_HOST").unwrap_or("localhost".to_string());
-    async_nats::connect(host)
+    let port = env::var("NATS_PORT").unwrap_or("4222".to_string());
+
+    async_nats::connect(format!("{}:{}", host, port))
         .await
         .expect("Could not connect to NATS")
 }
